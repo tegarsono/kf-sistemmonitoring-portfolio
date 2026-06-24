@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Supir | Driver KFA</title>
+    <link rel="icon" type="image/png" href="../../img/kf.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root { --kf-blue: #00529b; }
+        body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; }
+        .navbar-kf { background-color: white; border-bottom: 3px solid var(--kf-blue); box-shadow: 0 2px 10px rgba(0, 0, 0, .1); }
+        .card { border: none; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, .05); }
+        .card-header { background-color: var(--kf-blue); color: #fff; border-radius: 12px 12px 0 0 !important; }
+        .table thead th { background-color: var(--kf-blue); color: #fff; }
+        .btn-primary { background-color: var(--kf-blue); border-color: var(--kf-blue); }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-kf sticky-top mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <img src="../../img/kf.png" alt="Logo" height="38">
+                <span class="ms-2 fw-bold" style="color: var(--kf-blue);">Driver Monitoring</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="home.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../mobil/index.html">Data Mobil</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Data Supir</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../jadwal/index.html">Jadwal</a></li>
+                    <li class="nav-item"><button onclick="logout()" class="nav-link text-danger border-0 bg-transparent"><i class="fas fa-sign-out-alt"></i> Logout</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-id-card"></i> Data Supir</h2>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                <i class="fas fa-plus me-1"></i> Tambah Supir
+            </button>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Supir</th>
+                                <th>No. SIM</th>
+                                <th>No. HP</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Budi Santoso</td>
+                                <td>SIM-123456</td>
+                                <td>0812-3456-7890</td>
+                                <td><span class="badge bg-success">Aktif</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editData(1)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteData('Budi Santoso')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Ahmad Wijaya</td>
+                                <td>SIM-789012</td>
+                                <td>0813-9876-5432</td>
+                                <td><span class="badge bg-success">Aktif</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editData(2)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteData('Ahmad Wijaya')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Citra Dewi</td>
+                                <td>SIM-345678</td>
+                                <td>0851-2345-6789</td>
+                                <td><span class="badge bg-warning">Cuti</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editData(3)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteData('Citra Dewi')"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-plus-circle me-2"></i>Tambah Supir</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nama Supir <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nama" required placeholder="Contoh: Budi Santoso">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">No. SIM <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="sim" required placeholder="Contoh: SIM-123456">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">No. HP <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="hp" required placeholder="Contoh: 0812-3456-7890">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Status <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="status" required>
+                                        <option value="Aktif">Aktif</option>
+                                        <option value="Cuti">Cuti</option>
+                                        <option value="Non-Aktif">Non-Aktif</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" onclick="saveData('add')">
+                            <i class="fas fa-save me-1"></i> Simpan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Edit Supir</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm">
+                            <input type="hidden" name="id" id="editId">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nama Supir <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="nama" id="editNama" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">No. SIM <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="sim" id="editSim" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">No. HP <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="hp" id="editHp" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Status <span class="text-danger">*</span></label>
+                                    <select class="form-select" name="status" id="editStatus" required>
+                                        <option value="Aktif">Aktif</option>
+                                        <option value="Cuti">Cuti</option>
+                                        <option value="Non-Aktif">Non-Aktif</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary" onclick="saveData('edit')">
+                            <i class="fas fa-save me-1"></i> Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-5 pt-4 pb-2 bg-white border-top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <img src="../../img/kf.png" alt="Logo KF" height="25" class="opacity-75 mb-2">
+                    <p class="text-muted small">&copy; 2025 PT Kimia Farma Apotek</p>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: var(--kf-blue); height: 5px; width: 100%; margin-top: 10px;"></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = '../../auth/login.html';
+            }
+        }
+        function editData(id) {
+            const data = {
+                1: { nama: 'Budi Santoso', sim: 'SIM-123456', hp: '0812-3456-7890', status: 'Aktif' },
+                2: { nama: 'Ahmad Wijaya', sim: 'SIM-789012', hp: '0813-9876-5432', status: 'Aktif' },
+                3: { nama: 'Citra Dewi', sim: 'SIM-345678', hp: '0851-2345-6789', status: 'Cuti' }
+            };
+            
+            if (data[id]) {
+                document.getElementById('editNama').value = data[id].nama;
+                document.getElementById('editSim').value = data[id].sim;
+                document.getElementById('editHp').value = data[id].hp;
+                document.getElementById('editStatus').value = data[id].status;
+                document.getElementById('editId').value = id;
+            }
+        }
+
+        function saveData(type) {
+            if (type === 'add') {
+                const form = document.getElementById('addForm');
+                if (form.checkValidity()) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data supir berhasil ditambahkan.',
+                        confirmButtonColor: '#00529b'
+                    }).then(() => {
+                        bootstrap.Modal.getInstance(document.getElementById('addModal')).hide();
+                        form.reset();
+                    });
+                } else {
+                    form.reportValidity();
+                }
+            } else if (type === 'edit') {
+                const form = document.getElementById('editForm');
+                if (form.checkValidity()) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data supir berhasil diupdate.',
+                        confirmButtonColor: '#00529b'
+                    }).then(() => {
+                        bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
+                    });
+                } else {
+                    form.reportValidity();
+                }
+            }
+        }
+
+        function deleteData(name) {
+            Swal.fire({
+                title: 'Delete Data?',
+                html: '<strong>' + name + '</strong> akan dihapus permanen.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, Delete!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Deleted!', 'Data berhasil dihapus.', 'success');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
