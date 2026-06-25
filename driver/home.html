@@ -22,6 +22,7 @@
             background-color: #f4f7f6;
         }
 
+        /* ── Navbar ── */
         .navbar-kf {
             background-color: white;
             border-bottom: 3px solid var(--kf-blue);
@@ -115,6 +116,7 @@
             transform: translateY(-1px);
         }
 
+        /* ── Cards ── */
         .card {
             border: none;
             border-radius: 12px;
@@ -130,6 +132,90 @@
             padding: .85rem 1.25rem;
         }
 
+        .card-header.bg-white {
+            background-color: #fff !important;
+            color: #333;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .card-header.bg-light {
+            background-color: #f8f9fa !important;
+            color: #333;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        /* ── Status Cards ── */
+        .status-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.4rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .07);
+            border-left: 4px solid;
+        }
+
+        .status-card.aktif {
+            border-color: #00a859;
+        }
+
+        .status-card.idle {
+            border-color: #0070c0;
+        }
+
+        .status-card.offline {
+            border-color: #718096;
+        }
+
+        .status-val {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .status-lbl {
+            font-size: .78rem;
+            color: #718096;
+            margin-top: .2rem;
+        }
+
+        /* ── Jadwal Row ── */
+        .jadwal-row {
+            background: #fff;
+            border-radius: 10px;
+            padding: .85rem 1rem;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, .06);
+            margin-bottom: .6rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            align-items: center;
+        }
+
+        .jadwal-time {
+            font-size: .82rem;
+            color: #0070c0;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .jadwal-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .jadwal-supir {
+            font-weight: 600;
+            font-size: .88rem;
+        }
+
+        .jadwal-detail {
+            font-size: .78rem;
+            color: #718096;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ── Table ── */
         .table thead th {
             background-color: var(--kf-blue);
             color: #fff;
@@ -139,10 +225,12 @@
             padding: .85rem 1rem;
         }
 
-        .table td, .table th {
+        .table td,
+        .table th {
             vertical-align: middle;
         }
 
+        /* ── Buttons ── */
         .btn-primary {
             background-color: var(--kf-blue);
             border-color: var(--kf-blue);
@@ -153,6 +241,79 @@
             border-color: #003d75;
         }
 
+        .btn-outline-primary {
+            color: var(--kf-blue);
+            border-color: var(--kf-blue);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--kf-blue);
+            border-color: var(--kf-blue);
+        }
+
+        /* ── Forms ── */
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--kf-blue);
+            box-shadow: 0 0 0 .2rem rgba(0, 82, 155, .18);
+        }
+
+        /* ── Pagination ── */
+        .page-item.active .page-link {
+            background-color: var(--kf-blue);
+            border-color: var(--kf-blue);
+        }
+
+        .page-link {
+            color: var(--kf-blue);
+        }
+
+        .page-link:hover {
+            color: #003d75;
+        }
+
+        /* ── Modal ── */
+        .modal-header {
+            background-color: var(--kf-blue);
+            color: #fff;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 8px 32px rgba(0, 82, 155, .18);
+        }
+
+        /* ── Status badges ── */
+        .badge-status {
+            padding: .5em 1em;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: .85rem;
+        }
+
+        .status-aktif {
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-idle {
+            background-color: #fff3cd;
+            color: #664d03;
+        }
+
+        .status-offline {
+            background-color: #f8d7da;
+            color: #842029;
+        }
+
+        /* ── Alert ── */
         #alert-container {
             position: fixed;
             top: 90px;
@@ -161,18 +322,42 @@
             min-width: 300px;
         }
 
+        /* ── Responsive ── */
         @media (max-width: 767.98px) {
             .navbar-kf {
                 padding-top: .6rem;
                 padding-bottom: .6rem;
             }
-            .btn { font-size: .82rem; }
-            .card-body { padding: 1rem; }
+
+            .container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .btn {
+                font-size: .82rem;
+            }
+
+            .card-body {
+                padding: 1rem;
+            }
+
+            h2,
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .brand-text .brand-title {
+                font-size: .85rem;
+            }
         }
     </style>
 </head>
 
 <body>
+
     <div style="background-color: var(--kf-blue); height: 5px; width: 100%;"></div>
 
     <nav class="navbar navbar-expand-lg navbar-kf sticky-top mb-4">
@@ -239,77 +424,111 @@
         <p class="lead">Selamat datang, <strong>User</strong>. Pantau aktivitas dan penugasan driver operasional.</p>
         <hr>
 
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Tugas Hari Ini</h5>
-                        <p class="fs-2 mb-0 text-primary">8</p>
-                    </div>
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="status-card aktif">
+                    <div class="status-val text-success">12</div>
+                    <div class="status-lbl"><i class="fas fa-circle text-success me-1"></i>Driver Aktif</div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Driver Aktif</h5>
-                        <p class="fs-2 mb-0 text-success">12</p>
-                    </div>
+            <div class="col-6 col-md-3">
+                <div class="status-card idle">
+                    <div class="status-val text-primary">3</div>
+                    <div class="status-lbl"><i class="fas fa-circle text-primary me-1"></i>Driver Idle</div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Armada Tersedia</h5>
-                        <p class="fs-2 mb-0 text-warning">15</p>
-                    </div>
+            <div class="col-6 col-md-3">
+                <div class="status-card offline">
+                    <div class="status-val text-secondary">2</div>
+                    <div class="status-lbl"><i class="fas fa-circle text-secondary me-1"></i>Driver Offline</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="status-card" style="border-color:#d97706">
+                    <div class="status-val" style="color:#d97706">15</div>
+                    <div class="status-lbl"><i class="fas fa-truck me-1" style="color:#d97706"></i>Total Armada</div>
                 </div>
             </div>
         </div>
 
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <i class="fas fa-calendar-alt me-2"></i> Jadwal Tugas Hari Ini
+        <div class="row g-3">
+            <div class="col-12 col-lg-8">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span><i class="fas fa-calendar-day me-2 text-primary"></i>Jadwal Hari Ini</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="jadwal-row">
+                            <div class="jadwal-time">08:00 – 10:00</div>
+                            <div class="jadwal-info">
+                                <div class="jadwal-supir">Budi Santoso</div>
+                                <div class="jadwal-detail">
+                                    <i class="fas fa-car me-1"></i>Toyota Avanza (B 1234 CD)
+                                    &nbsp;|&nbsp;<i class="fas fa-map-marker-alt me-1"></i>Jakarta - Bandung
+                                </div>
+                                <div class="jadwal-detail"><i class="fas fa-user me-1"></i>Penumpang: 3 orang</div>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-success py-0 px-2" title="Tandai Selesai" onclick="return confirm('Tandai jadwal ini sebagai selesai?')">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="jadwal-row">
+                            <div class="jadwal-time">09:30 – 12:00</div>
+                            <div class="jadwal-info">
+                                <div class="jadwal-supir">Ahmad Wijaya</div>
+                                <div class="jadwal-detail">
+                                    <i class="fas fa-car me-1"></i>Daihatsu Xenia (B 5678 EF)
+                                    &nbsp;|&nbsp;<i class="fas fa-map-marker-alt me-1"></i>Jakarta - Surabaya
+                                </div>
+                                <div class="jadwal-detail"><i class="fas fa-user me-1"></i>Penumpang: 2 orang</div>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-success py-0 px-2" title="Tandai Selesai" onclick="return confirm('Tandai jadwal ini sebagai selesai?')">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="jadwal-row">
+                            <div class="jadwal-time">10:00 – 14:00</div>
+                            <div class="jadwal-info">
+                                <div class="jadwal-supir">Citra Dewi</div>
+                                <div class="jadwal-detail">
+                                    <i class="fas fa-car me-1"></i>Honda Mobilio (B 9012 GH)
+                                    &nbsp;|&nbsp;<i class="fas fa-map-marker-alt me-1"></i>Bandung - Yogyakarta
+                                </div>
+                                <div class="jadwal-detail"><i class="fas fa-user me-1"></i>Penumpang: 4 orang</div>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-success py-0 px-2" title="Tandai Selesai" onclick="return confirm('Tandai jadwal ini sebagai selesai?')">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Supir</th>
-                                <th>Mobil</th>
-                                <th>Tujuan</th>
-                                <th>Waktu</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Budi Santoso</td>
-                                <td>B 1234 CD</td>
-                                <td>Jakarta - Bandung</td>
-                                <td>08:00</td>
-                                <td><span class="badge bg-success">Berjalan</span></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Ahmad Wijaya</td>
-                                <td>B 5678 EF</td>
-                                <td>Jakarta - Surabaya</td>
-                                <td>09:30</td>
-                                <td><span class="badge bg-warning">Menunggu</span></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Citra Dewi</td>
-                                <td>B 9012 GH</td>
-                                <td>Bandung - Yogyakarta</td>
-                                <td>10:00</td>
-                                <td><span class="badge bg-info">Dijadwalkan</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+            <div class="col-12 col-lg-4">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-bolt me-2 text-warning"></i>Aksi Cepat</div>
+                    <div class="card-body d-grid gap-2">
+                        <a href="jadwal/index.html" class="btn btn-outline-primary text-start">
+                            <i class="fas fa-calendar-alt me-2"></i>Kelola Jadwal
+                        </a>
+                        <a href="jadwal/riwayat.html" class="btn btn-outline-secondary text-start">
+                            <i class="fas fa-history me-2"></i>Riwayat Perjalanan
+                        </a>
+                        <a href="mobil/index.html" class="btn btn-outline-warning text-start">
+                            <i class="fas fa-truck me-2"></i>Data Armada Kendaraan
+                        </a>
+                        <a href="supir/index.html" class="btn btn-outline-info text-start">
+                            <i class="fas fa-id-card me-2"></i>Data Supir
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -328,6 +547,10 @@
                         <span class="badge bg-primary">Distribusi Driver</span>
                     </p>
                 </div>
+            </div>
+            <hr class="my-2" style="opacity:.1;">
+            <div class="text-center">
+                <small style="font-size:10px;color:#ccc;">Sistem ini dikembangkan untuk kebutuhan operasional armada pengiriman farmasi.</small>
             </div>
         </div>
         <div style="background-color: var(--kf-blue); height: 5px; width: 100%; margin-top: 10px;"></div>

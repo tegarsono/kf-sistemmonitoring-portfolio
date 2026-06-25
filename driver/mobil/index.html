@@ -4,195 +4,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Mobil | Driver KFA</title>
-    <link rel="icon" type="image/png" href="/img/kf.png">
+    <title>Data Armada Mobil | Driver KFA</title>
+    <link rel="icon" type="image/png" href="../../img/kf.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        :root { --kf-blue: #00529b; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; }
-        .navbar-kf { background-color: white; border-bottom: 3px solid var(--kf-blue); box-shadow: 0 2px 10px rgba(0, 0, 0, .1); }
-        .card { border: none; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, .05); }
-        .card-header { background-color: var(--kf-blue); color: #fff; border-radius: 12px 12px 0 0 !important; }
-        .table thead th { background-color: var(--kf-blue); color: #fff; }
-        .btn-primary { background-color: var(--kf-blue); border-color: var(--kf-blue); }
+        :root {
+            --kf-blue: #00529b;
+            --kf-red: #e31e24;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6;
+        }
+
+        .navbar-kf {
+            background-color: white;
+            border-bottom: 3px solid var(--kf-blue);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--kf-blue) !important;
+            letter-spacing: .5px;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .brand-divider {
+            width: 1px;
+            height: 32px;
+            background-color: #d0d0d0;
+            margin: 0 12px;
+            flex-shrink: 0;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.2;
+        }
+
+        .brand-text .brand-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--kf-blue);
+            letter-spacing: .8px;
+            white-space: nowrap;
+        }
+
+        .brand-text .brand-subtitle {
+            font-size: .68rem;
+            font-weight: 400;
+            color: #888;
+            letter-spacing: .3px;
+            white-space: nowrap;
+        }
+
+        .nav-link {
+            color: #555 !important;
+            font-weight: 500;
+            padding: .5rem 1.2rem !important;
+            transition: all .3s;
+        }
+
+        .nav-link:hover {
+            color: var(--kf-blue) !important;
+        }
+
+        .nav-link.active {
+            color: var(--kf-blue) !important;
+            border-bottom: 2px solid var(--kf-red);
+        }
+
+        .back-to-hub-btn {
+            margin: 0 15px;
+            background-color: #ffc107;
+            color: #000080;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color .2s, transform .2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+        }
+
+        .back-to-hub-btn:hover {
+            background-color: #ffda6a;
+            color: #000080;
+            transform: translateY(-1px);
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .05);
+        }
+
+        .card-header {
+            background-color: var(--kf-blue);
+            color: #fff;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0 !important;
+            font-weight: 600;
+            padding: .85rem 1.25rem;
+        }
+
+        .table thead th {
+            background-color: var(--kf-blue);
+            color: #fff;
+            border-bottom: none;
+            font-weight: 600;
+            font-size: .875rem;
+            padding: .85rem 1rem;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: middle;
+        }
+
+        .btn-primary {
+            background-color: var(--kf-blue);
+            border-color: var(--kf-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: #003d75;
+            border-color: #003d75;
+        }
+
+        #alert-container {
+            position: fixed;
+            top: 90px;
+            right: 16px;
+            z-index: 9999;
+            min-width: 300px;
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-kf {
+                padding-top: .6rem;
+                padding-bottom: .6rem;
+            }
+            .btn {
+                font-size: .82rem;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <div style="background-color: var(--kf-blue); height: 5px; width: 100%;"></div>
+
     <nav class="navbar navbar-expand-lg navbar-kf sticky-top mb-4">
         <div class="container">
-            <a class="navbar-brand" href="home.html">
-                <img src="../../img/kf.png" alt="Logo" height="38">
-                <span class="ms-2 fw-bold" style="color: var(--kf-blue);">Driver Monitoring</span>
+            <a class="navbar-brand" href="../home.html">
+                <img src="../../img/kf.png" alt="Logo Kimia Farma Apotek" class="brand-logo">
+                <div class="brand-divider d-none d-md-block"></div>
+                <div class="brand-text d-none d-md-flex">
+                    <span class="brand-title">KIMIA FARMA APOTEK</span>
+                    <span class="brand-subtitle">Driver Monitoring System</span>
+                </div>
             </a>
+
+            <div class="d-flex align-items-center gap-2 ms-auto me-2 d-lg-none">
+                <a href="../index.html" class="back-to-hub-btn py-1 px-3" style="font-size:.8rem;">
+                    <i class="fas fa-arrow-circle-left me-1"></i> Hub
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="home.html">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Data Mobil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../supir/index.html">Data Supir</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../jadwal/index.html">Jadwal</a></li>
-                    <li class="nav-item"><button onclick="logout()" class="nav-link text-danger border-0 bg-transparent"><i class="fas fa-sign-out-alt"></i> Logout</button></li>
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item d-none d-lg-block">
+                        <a href="../index.html" class="back-to-hub-btn py-2 px-3" style="font-size:.8rem;">
+                            <i class="fas fa-arrow-circle-left me-1"></i> Hub Utama
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../home.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Data Mobil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../supir/index.html">Data Supir</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../jadwal/index.html">Jadwal Tugas</a>
+                    </li>
+                    <li class="nav-item d-none d-lg-block">
+                        <span class="nav-link px-2 text-muted" style="cursor:default;">|</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile/index.html">
+                            <i class="fas fa-user-circle me-1"></i> User
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <button onclick="logout()" class="nav-link text-danger border-0 bg-transparent">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container pb-5">
+        <div id="alert-container"></div>
+
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2><i class="fas fa-truck"></i> Data Mobil</h2>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                <i class="fas fa-plus me-1"></i> Tambah Mobil
-            </button>
+            <h2><i class="fas fa-truck me-2 text-warning"></i> Data Armada Mobil</h2>
+            <a href="create.html" class="btn btn-sm btn-light text-primary fw-semibold">
+                <i class="fas fa-plus me-1"></i>Tambah Mobil
+            </a>
         </div>
 
         <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>No. Polisi</th>
-                                <th>Merk/Type</th>
-                                <th>Tahun</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>B 1234 CD</td>
-                                <td>Toyota Avanza</td>
-                                <td>2022</td>
-                                <td><span class="badge bg-success">Aktif</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editData(1)"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteData('Mobil 1')"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>B 5678 EF</td>
-                                <td>Daihatsu Xenia</td>
-                                <td>2023</td>
-                                <td><span class="badge bg-success">Aktif</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editData(2)"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteData('Mobil 2')"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>B 9012 GH</td>
-                                <td>Honda Mobilio</td>
-                                <td>2021</td>
-                                <td><span class="badge bg-warning">Maintenance</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editData(3)"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteData('Mobil 3')"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add Modal -->
-        <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title"><i class="fas fa-plus-circle me-2"></i>Tambah Mobil</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="card-body pb-0">
+                <form method="GET" class="row g-2 mb-3">
+                    <div class="col-12 col-md-4">
+                        <input type="text" name="search" class="form-control form-control-sm" placeholder="Cari no. polisi, merk...">
                     </div>
-                    <div class="modal-body">
-                        <form id="addForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">No. Polisi <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="nopol" required placeholder="Contoh: B 1234 CD">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Merk/Type <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="merk" required placeholder="Contoh: Toyota Avanza">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Tahun <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="tahun" required placeholder="Contoh: 2023" min="1900" max="2099">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Status <span class="text-danger">*</span></label>
-                                    <select class="form-select" name="status" required>
-                                        <option value="Aktif">Aktif</option>
-                                        <option value="Maintenance">Maintenance</option>
-                                        <option value="Non-Aktif">Non-Aktif</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
+                    <div class="col-6 col-md-3">
+                        <select name="status" class="form-select form-select-sm">
+                            <option value="">Semua Status</option>
+                            <option value="Aktif">Aktif</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Non-Aktif">Non-Aktif</option>
+                        </select>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary" onclick="saveData('add')">
-                            <i class="fas fa-save me-1"></i> Simpan
+                    <div class="col-6 col-md-3 d-flex gap-2">
+                        <button class="btn btn-sm btn-primary w-100" type="button">
+                            <i class="fas fa-search me-1"></i>Cari
                         </button>
+                        <a href="index.html" class="btn btn-sm btn-outline-secondary">Reset</a>
                     </div>
-                </div>
+                </form>
             </div>
-        </div>
 
-        <!-- Edit Modal -->
-        <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Edit Mobil</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editForm">
-                            <input type="hidden" name="id" id="editId">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">No. Polisi <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="nopol" id="editNopol" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Merk/Type <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="merk" id="editMerk" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Tahun <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" name="tahun" id="editTahun" required min="1900" max="2099">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Status <span class="text-danger">*</span></label>
-                                    <select class="form-select" name="status" id="editStatus" required>
-                                        <option value="Aktif">Aktif</option>
-                                        <option value="Maintenance">Maintenance</option>
-                                        <option value="Non-Aktif">Non-Aktif</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary" onclick="saveData('edit')">
-                            <i class="fas fa-save me-1"></i> Update
-                        </button>
-                    </div>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>No. Polisi</th>
+                            <th>Merk/Type</th>
+                            <th>Tahun</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>B 1234 CD</td>
+                            <td>Toyota Avanza</td>
+                            <td>2022</td>
+                            <td><span class="badge-status status-aktif">Aktif</span></td>
+                            <td>
+                                <a href="edit.html" class="btn btn-sm btn-outline-primary py-0 px-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="deleteData('Mobil B 1234 CD')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>B 5678 EF</td>
+                            <td>Daihatsu Xenia</td>
+                            <td>2023</td>
+                            <td><span class="badge-status status-aktif">Aktif</span></td>
+                            <td>
+                                <a href="edit.html" class="btn btn-sm btn-outline-primary py-0 px-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="deleteData('Mobil B 5678 EF')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>B 9012 GH</td>
+                            <td>Honda Mobilio</td>
+                            <td>2021</td>
+                            <td><span class="badge-status status-idle">Maintenance</span></td>
+                            <td>
+                                <a href="edit.html" class="btn btn-sm btn-outline-primary py-0 px-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="deleteData('Mobil B 9012 GH')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -204,6 +341,16 @@
                     <img src="../../img/kf.png" alt="Logo KF" height="25" class="opacity-75 mb-2">
                     <p class="text-muted small">&copy; 2025 PT Kimia Farma Apotek</p>
                 </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="text-muted small">
+                        Versi 1.0.0 <br>
+                        <span class="badge bg-primary">Distribusi Driver</span>
+                    </p>
+                </div>
+            </div>
+            <hr class="my-2" style="opacity:.1;">
+            <div class="text-center">
+                <small style="font-size:10px;color:#ccc;">Sistem ini dikembangkan untuk kebutuhan operasional armada pengiriman farmasi.</small>
             </div>
         </div>
         <div style="background-color: var(--kf-blue); height: 5px; width: 100%; margin-top: 10px;"></div>
@@ -215,55 +362,8 @@
         function logout() {
             if (confirm('Apakah Anda yakin ingin logout?')) {
                 localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
                 window.location.href = '../../auth/login.html';
-            }
-        }
-        function editData(id) {
-            const data = {
-                1: { nopol: 'B 1234 CD', merk: 'Toyota Avanza', tahun: '2022', status: 'Aktif' },
-                2: { nopol: 'B 5678 EF', merk: 'Daihatsu Xenia', tahun: '2023', status: 'Aktif' },
-                3: { nopol: 'B 9012 GH', merk: 'Honda Mobilio', tahun: '2021', status: 'Maintenance' }
-            };
-            
-            if (data[id]) {
-                document.getElementById('editNopol').value = data[id].nopol;
-                document.getElementById('editMerk').value = data[id].merk;
-                document.getElementById('editTahun').value = data[id].tahun;
-                document.getElementById('editStatus').value = data[id].status;
-                document.getElementById('editId').value = id;
-            }
-        }
-
-        function saveData(type) {
-            if (type === 'add') {
-                const form = document.getElementById('addForm');
-                if (form.checkValidity()) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: 'Data mobil berhasil ditambahkan.',
-                        confirmButtonColor: '#00529b'
-                    }).then(() => {
-                        bootstrap.Modal.getInstance(document.getElementById('addModal')).hide();
-                        form.reset();
-                    });
-                } else {
-                    form.reportValidity();
-                }
-            } else if (type === 'edit') {
-                const form = document.getElementById('editForm');
-                if (form.checkValidity()) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: 'Data mobil berhasil diupdate.',
-                        confirmButtonColor: '#00529b'
-                    }).then(() => {
-                        bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
-                    });
-                } else {
-                    form.reportValidity();
-                }
             }
         }
 
@@ -283,6 +383,12 @@
                 }
             });
         }
+
+        setTimeout(() => {
+            document.querySelectorAll('#alert-container .alert').forEach(a => {
+                try { new bootstrap.Alert(a).close(); } catch (e) { }
+            });
+        }, 4000);
     </script>
 </body>
 
