@@ -1,228 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoring Maintenance AC | KFA GA</title>
-    <link rel="icon" type="image/png" href="/img/kf.png">
+    <title>AC Monitoring Maintenance GA | KFA</title>
+    <link rel="icon" type="image/png" href="../img/kf.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         :root {
-            --ga-primary: #1565c0;
-            --ga-primary-hover: #1976d2;
-            --ga-primary-light: #e3f0ff;
-            --ga-sidebar-bg: #0d1b2a;
-            --ga-page-bg: #f0f2f5;
-            --ga-text-dark: #1a2744;
-            --ga-border: #e2e8f0;
-            --ga-shadow-card: 0 1px 4px rgba(0, 0, 0, .08), 0 4px 16px rgba(21, 101, 192, .07);
+            --kf-blue: #0056b3;
+            --kf-blue-dark: #003d82;
+            --kf-light: #f8f9fa;
+            --kf-accent: #00a859;
         }
-
-        * { box-sizing: border-box; }
 
         body {
-            background-color: var(--ga-page-bg);
-            color: var(--ga-text-dark);
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
         }
 
-        .sidebar {
-            height: 100vh;
-            width: 260px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #0d1b2a;
-            color: #e8edf3;
-            box-shadow: 3px 0 12px rgba(0, 0, 0, .25);
-            z-index: 1040;
-            overflow-x: hidden;
-            overflow-y: auto;
-            transition: transform 0.3s ease;
-            transform: translateX(-260px);
+        /* Navbar */
+        .navbar {
+            background: #ffffff !important;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+            border-bottom: 3px solid var(--kf-blue);
+            min-height: 64px;
+            padding-top: 0;
+            padding-bottom: 0;
         }
 
-        .sidebar.open { transform: translateX(0); }
-
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,.55);
-            z-index: 1035;
-        }
-        .sidebar-overlay.active { display: block; }
-
-        .sidebar-brand {
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--kf-blue) !important;
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 20px 20px 16px;
-            border-bottom: 1px solid rgba(255,255,255,.07);
-            margin-bottom: 8px;
+            padding: 10px 0;
+            text-decoration: none;
         }
 
-        .sidebar-brand-icon {
-            width: 36px; height: 36px;
-            background: #1565c0;
+        .navbar-brand .brand-icon {
+            width: 38px;
+            height: 38px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-        }
-        .sidebar-brand-icon i { color: #fff; font-size: 1rem; }
-        .sidebar-brand-text { font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.2; }
-        .sidebar-brand-sub { font-size: .7rem; color: #7a9bbf; font-weight: 400; }
-
-        .profile-section {
-            text-align: center;
-            padding: 16px 20px 12px;
-            border-bottom: 1px solid rgba(255,255,255,.07);
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: background-color .2s;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-        }
-        .profile-section:hover { background-color: #1e3a5f; }
-        .profile-section img {
-            width: 56px; height: 56px;
-            border-radius: 50%;
-            border: 2px solid #1565c0;
-            object-fit: cover;
-        }
-        .profile-section h6 { color: #fff; font-size: .9rem; font-weight: 600; margin: 8px 0 2px; }
-        .profile-section small { color: #7a9bbf; font-size: .75rem; }
-
-        .nav-section-label {
-            font-size: .68rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px;
-            color: #4a6a8a;
-            padding: 12px 20px 4px;
+            overflow: hidden;
         }
 
-        .sidebar .nav-link {
-            color: #b0c4d8 !important;
-            padding: 10px 20px;
-            border-radius: 0;
+        .navbar-brand .brand-icon img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .navbar-brand .brand-title {
+            font-size: .95rem;
+            font-weight: 700;
+            color: var(--kf-blue);
+            line-height: 1.2;
+        }
+
+        .navbar-brand .brand-sub {
+            font-size: .7rem;
+            font-weight: 400;
+            color: #6c757d;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: .875rem;
+            font-weight: 500;
+            color: #555 !important;
+            padding: 8px 12px !important;
+            border-radius: 6px;
             transition: background-color .2s, color .2s;
-            text-decoration: none;
-            font-size: .9rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
+            white-space: nowrap;
         }
-        .sidebar .nav-link i.nav-icon {
-            width: 18px; text-align: center;
-            font-size: .95rem; flex-shrink: 0;
+
+        .navbar-nav .nav-link:hover {
+            color: var(--kf-blue) !important;
+            background: rgba(0, 86, 179, .07);
         }
-        .sidebar .nav-link:hover {
-            background-color: #1e3a5f;
-            color: #fff !important;
-        }
-        .sidebar .nav-item.active>.nav-link,
-        .sidebar .nav-link.active-link {
-            background-color: #1565c0;
-            color: #fff !important;
+
+        .navbar-nav .nav-link.active {
             font-weight: 600;
-            border-left: 3px solid #42a5f5;
+            color: var(--kf-blue) !important;
+            background: rgba(0, 86, 179, .1);
         }
 
-        .back-to-hub-btn {
-            margin: 8px 16px 4px;
-            background-color: rgba(21,101,192,.15);
-            color: #42a5f5;
+        .nav-divider {
+            width: 1px;
+            height: 28px;
+            background: #dee2e6;
+            margin: 0 6px;
+            align-self: center;
+        }
+
+        .btn-hub {
+            font-size: .82rem;
             font-weight: 600;
-            font-size: .85rem;
-            padding: 9px 14px;
-            border-radius: 8px;
-            text-align: center;
+            color: var(--kf-blue) !important;
+            background: rgba(0, 86, 179, .08);
+            border: 1px solid rgba(0, 86, 179, .25);
+            border-radius: 6px;
+            padding: 6px 12px;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: background-color .2s, color .2s;
-            border: 1px solid rgba(21,101,192,.3);
-        }
-        .back-to-hub-btn:hover {
-            background-color: #1565c0;
-            color: #fff;
-            border-color: #1565c0;
-        }
-
-        .sidebar-footer {
-            padding: 16px 20px;
-            border-top: 1px solid rgba(255,255,255,.07);
-            margin-top: auto;
-            font-size: .75rem;
-            color: #4a6a8a;
-            text-align: center;
-        }
-
-        .toggle-header {
-            height: 60px;
-            padding: 0 20px;
-            background-color: #fff;
-            box-shadow: 0 1px 4px rgba(0,0,0,.08);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 1030;
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            transition: left .3s ease;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        @media (min-width: 768px) {
-            .toggle-header.sidebar-open { left: 260px; }
-        }
-        .toggle-header h5 { font-size: 1rem; font-weight: 600; color: #1a2744; }
-
-        .sidebar-toggler-btn {
-            background-color: #1565c0;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            flex-shrink: 0;
-            line-height: 1;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1rem;
+            gap: 5px;
+            transition: background-color .2s, border-color .2s;
+            white-space: nowrap;
+        }
+
+        .btn-hub:hover {
+            background: var(--kf-blue);
+            color: #fff !important;
+            border-color: var(--kf-blue);
+        }
+
+        .navbar-user-area {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-user-profile {
+            font-size: .82rem;
+            font-weight: 500;
+            color: #444 !important;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 6px 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             transition: background-color .2s;
-        }
-        .sidebar-toggler-btn:hover { background-color: #1976d2; }
-
-        .content-wrapper {
-            margin-left: 0;
-            transition: margin-left .3s ease;
-            padding-top: 80px;
-            min-height: 100vh;
-            background-color: #f0f2f5;
-        }
-        @media (min-width: 768px) {
-            .content-wrapper.sidebar-open { margin-left: 260px; }
+            white-space: nowrap;
+            max-width: 160px;
+            overflow: hidden;
         }
 
+        .btn-user-profile span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .btn-user-profile:hover {
+            background: #e9ecef;
+            color: #333 !important;
+        }
+
+        .btn-logout {
+            font-size: .82rem;
+            font-weight: 500;
+            color: #dc3545 !important;
+            background: #fff5f5;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 6px 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color .2s, color .2s;
+            white-space: nowrap;
+        }
+
+        .btn-logout:hover {
+            background: #dc3545;
+            color: #fff !important;
+            border-color: #dc3545;
+        }
+
+        .notif-badge {
+            font-size: .65rem;
+            padding: 2px 5px;
+            vertical-align: middle;
+        }
+
+        /* Content */
+        .main-content {
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        /* Cards */
         .card {
-            border: 1px solid var(--ga-border);
+            border: none;
             border-radius: 12px;
-            box-shadow: var(--ga-shadow-card);
-            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .05);
         }
+
         .card-header {
-            background-color: var(--ga-primary);
+            background-color: var(--kf-blue);
             color: #fff;
             border-bottom: none;
             border-radius: 12px 12px 0 0 !important;
@@ -230,278 +215,624 @@
             padding: .85rem 1.25rem;
         }
 
+        .card-header.bg-white {
+            background-color: #fff !important;
+            color: #333;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .card-header.bg-light {
+            background-color: #f8f9fa !important;
+            color: #333;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        /* Table */
         .table thead th {
-            background-color: var(--ga-primary);
+            background-color: var(--kf-blue);
             color: #fff;
             border-bottom: none;
             font-weight: 600;
             font-size: .875rem;
             padding: .85rem 1rem;
         }
-        .table tbody tr:hover { background-color: var(--ga-primary-light); }
-        .table td { font-size: .84rem; vertical-align: middle; }
 
+        .table td,
+        .table th {
+            vertical-align: middle;
+        }
+
+        .table-warning {
+            --bs-table-bg: #fff3cd;
+        }
+
+        .table-danger {
+            --bs-table-bg: #f8d7da;
+        }
+
+        /* Buttons */
         .btn-primary {
-            background-color: var(--ga-primary);
-            border-color: var(--ga-primary);
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background-color: var(--ga-primary-hover);
-            border-color: var(--ga-primary-hover);
+            background-color: var(--kf-blue);
+            border-color: var(--kf-blue);
         }
 
+        .btn-primary:hover {
+            background-color: #003d75;
+            border-color: #003d75;
+        }
+
+        .btn-outline-primary {
+            color: var(--kf-blue);
+            border-color: var(--kf-blue);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--kf-blue);
+            border-color: var(--kf-blue);
+        }
+
+        /* Forms */
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--kf-blue);
+            box-shadow: 0 0 0 .2rem rgba(0, 86, 179, .18);
+        }
+
+        /* Pagination */
+        .page-item.active .page-link {
+            background-color: var(--kf-blue);
+            border-color: var(--kf-blue);
+        }
+
+        .page-link {
+            color: var(--kf-blue);
+        }
+
+        .page-link:hover {
+            color: var(--kf-blue-dark);
+            background-color: #e0f0ff;
+        }
+
+        /* Modal */
+        .modal-header {
+            background-color: var(--kf-blue);
+            color: #fff;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 8px 32px rgba(0, 86, 179, .18);
+        }
+
+        /* Alert */
         #alert-container {
             position: fixed;
-            top: 70px; right: 16px;
+            top: 80px;
+            right: 16px;
             z-index: 9999;
             min-width: 300px;
         }
 
-        @media (max-width: 767.98px) {
-            .content-wrapper.p-4 { padding: 1rem !important; }
-            .card { margin-bottom: 1rem; }
-            .card-body { padding: 1rem; }
-            .btn { font-size: .82rem; }
+        /* Status badges */
+        .status-normal {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: .5em 1em;
+            border-radius: 20px;
+            font-weight: 500;
         }
 
-        .status-layak { background-color: #d1fae5; color: #065f46; padding: .5em 1em; border-radius: 20px; font-weight: 500; }
-        .status-tidak { background-color: #fee2e2; color: #991b1b; padding: .5em 1em; border-radius: 20px; font-weight: 500; }
-        .status-normal { background-color: #d1fae5; color: #065f46; padding: .5em 1em; border-radius: 20px; font-weight: 500; }
-        .status-service { background-color: #fef3c7; color: #92400e; padding: .5em 1em; border-radius: 20px; font-weight: 500; }
+        .status-wajib {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: .5em 1em;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                padding: 12px 0 8px;
+                border-top: 1px solid #e9ecef;
+                margin-top: 8px;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 9px 10px !important;
+                border-radius: 6px;
+            }
+
+            .nav-divider {
+                display: none;
+            }
+
+            .navbar-user-area {
+                flex-wrap: wrap;
+                padding-top: 8px;
+                border-top: 1px solid #e9ecef;
+                margin-top: 4px;
+            }
+
+            .btn-hub,
+            .btn-user-profile,
+            .btn-logout {
+                flex: 1 1 auto;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .main-content {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            .card-body {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <div class="sidebar" id="mainSidebar">
-        <div class="sidebar-brand">
-            <div class="sidebar-brand-icon">
-                <i class="fas fa-snowflake"></i>
-            </div>
-            <div>
-                <div class="sidebar-brand-text">AC Monitoring</div>
-                <div class="sidebar-brand-sub">Kimia Farma Apotek</div>
-            </div>
-        </div>
+    <!-- NAVBAR AC MONITORING -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="../index.html">
+                <div class="brand-icon">
+                    <img src="../img/kf.png" alt="Logo KFA">
+                </div>
+                <div>
+                    <div class="brand-title">KIMIA FARMA APOTEK</div>
+                    <div class="brand-sub">GA Aset Monitoring Sistem</div>
+                </div>
+            </a>
 
-        <a href="../../index.html" class="profile-section" title="Lihat Profil">
-            <img src="/img/kf.png" alt="Foto Profil">
-            <h6>User</h6>
-            <small>Staff GA</small>
-        </a>
+            <!-- Mobile toggler -->
+            <button class="navbar-toggler border-0 ms-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <a href="../../index.html" class="back-to-hub-btn">
-            <i class="fas fa-arrow-left"></i> Kembali ke Hub Utama
-        </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Main nav links -->
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="bi bi-house-door"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="notifikasi.html">
+                            <i class="bi bi-bell"></i> Notifikasi
+                        </a>
+                    </li>
+                </ul>
 
-        <div class="nav-section-label">Menu Utama</div>
-        <ul class="nav flex-column">
-            <li class="nav-item active">
-                <a class="nav-link active-link" href="index.html">
-                    <i class="fas fa-home nav-icon"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="notifikasi.html">
-                    <i class="fas fa-bell nav-icon"></i>
-                    <span>Notifikasi</span>
-                </a>
-            </li>
-        </ul>
-
-        <div class="sidebar-footer">
-            &copy; 2025 Kimia Farma Apotek
-        </div>
-    </div>
-
-    <div class="toggle-header" id="mainHeader">
-        <button class="sidebar-toggler-btn" id="sidebarToggle">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="d-flex justify-content-between align-items-center flex-grow-1">
-            <h5 class="mb-0">Monitoring Maintenance AC</h5>
-            <div class="d-flex align-items-center gap-2 me-3">
-                <a href="../../profile/index.html" class="btn btn-outline-secondary btn-sm" title="Profil Saya">
-                    <i class="fas fa-user-circle me-1"></i>
-                    <span class="d-none d-sm-inline">Profil</span>
-                </a>
-                <button onclick="logout()" class="btn btn-outline-danger btn-sm">
-                    <i class="fas fa-sign-out-alt me-1"></i>
-                    <span class="d-none d-sm-inline">Logout</span>
-                </button>
+                <!-- Right-side actions -->
+                <div class="navbar-user-area ms-lg-3 mt-2 mt-lg-0">
+                    <a href="../index.html" class="btn-hub">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Hub Utama</span>
+                    </a>
+                    <div class="nav-divider d-none d-lg-block"></div>
+                    <a href="../profile/index.html" class="btn-user-profile" title="Profil Saya">
+                        <i class="fas fa-user-circle"></i>
+                        <span>User</span>
+                    </a>
+                    <button onclick="logout()" class="btn-logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="content-wrapper px-4 pb-4" id="contentWrapper">
+    <!-- CONTENT -->
+    <div class="container main-content">
+
+        <!-- Alert Container -->
         <div id="alert-container"></div>
 
-        <h2 class="mb-4"><i class="fas fa-snowflake"></i> Monitoring Maintenance AC</h2>
-        <p class="lead">Pantau status perawatan dan maintenance aset AC di seluruh unit bisnis.</p>
-        <hr>
-
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Aset AC</h5>
-                        <p class="fs-2 mb-0 text-primary">45</p>
-                    </div>
+        <!-- Stats -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="card text-center py-3">
+                    <div class="text-primary fs-4"><i class="fas fa-list-alt"></i></div>
+                    <div class="fw-bold fs-5">45</div>
+                    <div class="text-muted" style="font-size:.78rem">Total Item</div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Perlu Servis</h5>
-                        <p class="fs-2 mb-0 text-warning">8</p>
-                    </div>
+            <div class="col-6 col-md-3">
+                <div class="card text-center py-3">
+                    <div class="text-success fs-4"><i class="fas fa-check-circle"></i></div>
+                    <div class="fw-bold fs-5">37</div>
+                    <div class="text-muted" style="font-size:.78rem">Normal</div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Kondisi Baik</h5>
-                        <p class="fs-2 mb-0 text-success">37</p>
-                    </div>
+            <div class="col-6 col-md-3">
+                <div class="card text-center py-3">
+                    <div class="text-warning fs-4"><i class="fas fa-tools"></i></div>
+                    <div class="fw-bold fs-5">8</div>
+                    <div class="text-muted" style="font-size:.78rem">Wajib Service</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card text-center py-3">
+                    <div class="text-danger fs-4"><i class="fas fa-bell"></i></div>
+                    <div class="fw-bold fs-5">3</div>
+                    <div class="text-muted" style="font-size:.78rem">Notifikasi</div>
                 </div>
             </div>
         </div>
 
-        <div class="card shadow-sm">
-            <div class="card-header">
-                <i class="fas fa-list me-2"></i> Daftar Aset AC
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Kode Aset</th>
-                                <th>Lokasi</th>
-                                <th>Merk/Type</th>
-                                <th>Terakhir Servis</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>AC-001</td>
-                                <td>Kantor Pusat</td>
-                                <td>Daikin 2 PK</td>
-                                <td>2025-01-15</td>
-                                <td><span class="status-layak">Layak</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" onclick="editData(1)"><i class="fas fa-edit"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>AC-002</td>
-                                <td>Cabang 1</td>
-                                <td>Panasonic 1.5 PK</td>
-                                <td>2024-12-20</td>
-                                <td><span class="status-service">Perlu Service</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" onclick="editData(2)"><i class="fas fa-edit"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>AC-003</td>
-                                <td>Cabang 2</td>
-                                <td>LG 2 PK</td>
-                                <td>2025-01-10</td>
-                                <td><span class="status-layak">Layak</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" onclick="editData(3)"><i class="fas fa-edit"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!-- Main Card -->
+        <div class="card">
+            <div class="card-header d-flex flex-wrap gap-2 justify-content-between align-items-center">
+                <span><i class="fas fa-snowflake me-2 text-info"></i>AC Monitoring Maintenance Data</span>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="create.html" class="btn btn-sm btn-light text-primary fw-semibold">
+                        <i class="fas fa-plus me-1"></i>Add
+                    </a>
+                    <a href="notifikasi.html" class="btn btn-sm btn-warning text-dark fw-semibold">
+                        <i class="fas fa-bell me-1"></i>Notifikasi
+                    </a>
+                    <button class="btn btn-sm btn-outline-light" onclick="downloadTemplate()">
+                        <i class="fas fa-download me-1"></i>Template
+                    </button>
+                    <button class="btn btn-sm btn-outline-light" data-bs-toggle="modal" data-bs-target="#importModal">
+                        <i class="fas fa-upload me-1"></i>Import
+                    </button>
+                    <button class="btn btn-sm btn-light text-success fw-semibold" onclick="exportExcel()">
+                        <i class="fas fa-file-excel me-1"></i>Excel
+                    </button>
+                    <button class="btn btn-sm btn-light text-danger fw-semibold" onclick="generatePdf()">
+                        <i class="fas fa-file-pdf me-1"></i>Generate PDF
+                    </button>
                 </div>
+            </div>
+
+            <div class="card-body pb-0">
+                <form method="GET" id="filterForm" class="row g-2 mb-3">
+                    <div class="col-12 col-md-4">
+                        <input type="text" name="search" class="form-control form-control-sm" 
+                               placeholder="Cari kode GA, lokasi, nama barang..." onkeyup="searchTable()">
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <select name="jenis_barang" class="form-select form-select-sm" onchange="filterTable()">
+                            <option value="">Semua Jenis</option>
+                            <option value="AC Split">AC Split</option>
+                            <option value="AC Cassette">AC Cassette</option>
+                            <option value="AC Standing">AC Standing</option>
+                            <option value="AC Window">AC Window</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <select name="status" class="form-select form-select-sm" onchange="filterTable()">
+                            <option value="">Semua Status</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Wajib Service">Wajib Service</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-3 d-flex gap-2">
+                        <button class="btn btn-sm btn-primary w-100" type="button" onclick="filterTable()">
+                            <i class="fas fa-search me-1"></i>Filter
+                        </button>
+                        <a href="index.html" class="btn btn-sm btn-outline-secondary">Reset</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="mainTable">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="checkAll" class="form-check-input" onchange="toggleCheckAll()"></th>
+                            <th>#</th>
+                            <th>Kode GA</th>
+                            <th>Lokasi</th>
+                            <th>Nama Barang</th>
+                            <th>Jenis</th>
+                            <th>Tgl. Perawatan Terakhir</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check" value="1"></td>
+                            <td>1</td>
+                            <td><code>AC-001</code></td>
+                            <td>Kantor Pusat</td>
+                            <td>AC Split Daikin 2 PK</td>
+                            <td><span class="badge bg-info text-dark">AC Split</span></td>
+                            <td>15/01/2025</td>
+                            <td><span class="badge bg-success">Normal</span></td>
+                            <td>
+                                <a href="edit.html" class="btn btn-sm btn-outline-primary py-0 px-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="deleteData(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="table-warning">
+                            <td><input type="checkbox" class="form-check-input row-check" value="2"></td>
+                            <td>2</td>
+                            <td><code>AC-002</code></td>
+                            <td>Cabang 1</td>
+                            <td>AC Cassette Panasonic 1.5 PK</td>
+                            <td><span class="badge bg-info text-dark">AC Cassette</span></td>
+                            <td>20/12/2024 <span class="badge bg-danger ms-1">2 months ago</span></td>
+                            <td><span class="badge bg-warning text-dark">Wajib Service</span></td>
+                            <td>
+                                <a href="edit.html" class="btn btn-sm btn-outline-primary py-0 px-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="deleteData(2)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check" value="3"></td>
+                            <td>3</td>
+                            <td><code>AC-003</code></td>
+                            <td>Cabang 2</td>
+                            <td>AC Standing LG 2 PK</td>
+                            <td><span class="badge bg-info text-dark">AC Standing</span></td>
+                            <td>10/01/2025</td>
+                            <td><span class="badge bg-success">Normal</span></td>
+                            <td>
+                                <a href="edit.html" class="btn btn-sm btn-outline-primary py-0 px-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="deleteData(3)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="table-danger">
+                            <td><input type="checkbox" class="form-check-input row-check" value="4"></td>
+                            <td>4</td>
+                            <td><code>AC-004</code></td>
+                            <td>Cabang 3</td>
+                            <td>AC Window Samsung 1 PK</td>
+                            <td><span class="badge bg-info text-dark">AC Window</span></td>
+                            <td>05/11/2024 <span class="badge bg-danger ms-1">3 months ago</span></td>
+                            <td><span class="badge bg-warning text-dark">Wajib Service</span></td>
+                            <td>
+                                <a href="edit.html" class="btn btn-sm btn-outline-primary py-0 px-2">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-sm btn-outline-danger py-0 px-2" onclick="deleteData(4)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-body pt-2 d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                <div>
+                    <button class="btn btn-sm btn-danger" id="btnPdfSelected" disabled onclick="generatePdfSelected()">
+                        <i class="fas fa-file-pdf me-1"></i>PDF Item Terpilih
+                    </button>
+                </div>
+                <nav>
+                    <ul class="pagination pagination-sm mb-0">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
 
-    <div class="sidebar-footer" style="position:fixed;bottom:0;left:0;width:260px;background:#0d1b2a;padding:16px 20px;border-top:1px solid rgba(255,255,255,.07);font-size:.75rem;color:#4a6a8a;text-align:center;z-index:1040;">
-        &copy; 2025 Kimia Farma Apotek
+    <!-- Footer -->
+    <footer class="bg-white border-top mt-5 py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <span class="text-muted small">&copy; 2025 <strong>Kimia Farma Apotek</strong>. All Rights Reserved.</span>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <span class="badge bg-light text-dark border p-2">
+                        <i class="bi bi-clock-history me-1 text-primary"></i> Sistem Monitoring Rutin
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Import Modal -->
+    <div class="modal fade" id="importModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Data Monitoring</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form onsubmit="importData(event)">
+                    <div class="modal-body">
+                        <p class="small text-muted mb-2">
+                            <a href="#" onclick="downloadTemplate()">Download template</a> first.
+                        </p>
+                        <input type="file" name="excel_file" class="form-control" accept=".xlsx,.xls" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Import</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script>
-        const sidebar = document.getElementById('mainSidebar');
-        const content = document.getElementById('contentWrapper');
-        const header = document.getElementById('mainHeader');
-        const toggleBtn = document.getElementById('sidebarToggle');
-        const overlay = document.getElementById('sidebarOverlay');
-        const DESKTOP = () => window.innerWidth >= 768;
+        // Auto-hide alerts
+        setTimeout(() => {
+            document.querySelectorAll('#alert-container .alert').forEach(a => {
+                try { new bootstrap.Alert(a).close(); } catch (e) { }
+            });
+        }, 4000);
 
-        let isOpen = false;
+        // Toggle all checkboxes
+        function toggleCheckAll() {
+            const checkAll = document.getElementById('checkAll');
+            const rowChecks = document.querySelectorAll('.row-check');
+            rowChecks.forEach(cb => cb.checked = checkAll.checked);
+            updatePdfBtn();
+        }
 
-        function applyState() {
-            if (isOpen) {
-                sidebar.classList.add('open');
-                if (DESKTOP()) {
-                    content.classList.add('sidebar-open');
-                    header.classList.add('sidebar-open');
-                    overlay.classList.remove('active');
-                } else {
-                    content.classList.remove('sidebar-open');
-                    header.classList.remove('sidebar-open');
-                    overlay.classList.add('active');
+        // Update PDF button state
+        function updatePdfBtn() {
+            const checked = document.querySelectorAll('.row-check:checked').length;
+            document.getElementById('btnPdfSelected').disabled = checked === 0;
+        }
+
+        // Listen for row checkbox changes
+        document.querySelectorAll('.row-check').forEach(cb => {
+            cb.addEventListener('change', updatePdfBtn);
+        });
+
+        // Search table
+        function searchTable() {
+            const input = document.getElementById('searchInput') || document.querySelector('input[name="search"]');
+            if (!input) return;
+            const filter = input.value.toUpperCase().trim();
+            const table = document.getElementById('mainTable');
+            if (!table) return;
+            const tr = table.getElementsByTagName('tr');
+            for (let i = 1; i < tr.length; i++) {
+                const tds = tr[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 0; j < tds.length; j++) {
+                    if (tds[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
                 }
-            } else {
-                sidebar.classList.remove('open');
-                content.classList.remove('sidebar-open');
-                header.classList.remove('sidebar-open');
-                overlay.classList.remove('active');
+                tr[i].style.display = found ? '' : 'none';
             }
         }
 
-        isOpen = DESKTOP();
-        applyState();
+        // Filter table
+        function filterTable() {
+            searchTable();
+            Swal.fire({
+                icon: 'info',
+                title: 'Filter Diterapkan',
+                text: 'Data telah difilter.',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
 
-        toggleBtn.addEventListener('click', function () {
-            isOpen = !isOpen;
-            applyState();
-        });
+        // Delete data
+        function deleteData(id) {
+            Swal.fire({
+                title: 'Hapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, Delete!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Deleted!', 'Data berhasil dihapus.', 'success');
+                }
+            });
+        }
 
-        overlay.addEventListener('click', function () {
-            isOpen = false;
-            applyState();
-        });
+        // Download template
+        function downloadTemplate() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Download Template',
+                text: 'Template Excel akan diunduh.',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
 
-        window.addEventListener('resize', function () {
-            isOpen = DESKTOP();
-            applyState();
-        });
+        // Export Excel
+        function exportExcel() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Export Excel',
+                text: 'File Excel sedang diproses...',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
 
+        // Generate PDF
+        function generatePdf() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Generate PDF',
+                text: 'PDF sedang dibuat...',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+
+        // Generate PDF Selected
+        function generatePdfSelected() {
+            const checked = document.querySelectorAll('.row-check:checked');
+            if (checked.length === 0) return;
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Generate PDF',
+                text: `PDF untuk ${checked.length} item terpilih sedang dibuat...`,
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+
+        // Import data
+        function importData(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Import Berhasil',
+                text: 'Data monitoring berhasil diimport.',
+                confirmButtonColor: '#0056b3'
+            }).then(() => {
+                bootstrap.Modal.getInstance(document.getElementById('importModal')).hide();
+            });
+        }
+
+        // Logout
         function logout() {
             if (confirm('Apakah Anda yakin ingin logout?')) {
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('username');
-                window.location.href = '../../auth/login.html';
+                window.location.href = '../auth/login.html';
             }
-        }
-
-        function editData(id) {
-            Swal.fire({
-                title: 'Edit Status AC',
-                html: '<input type="text" class="swal2-input" placeholder="Status" value="Layak">',
-                confirmButtonText: 'Update',
-                showCancelButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire('Berhasil!', 'Status berhasil diupdate.', 'success');
-                }
-            });
         }
     </script>
 </body>
